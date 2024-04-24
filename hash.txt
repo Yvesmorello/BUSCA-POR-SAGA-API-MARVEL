@@ -1,0 +1,18 @@
+hash da pesquisa API - 41adcf82f191215ea4eee5854c9c4a7f
+
+
+http://gateway.marvel.com/v1/public/comics?ts=1&apikey=1234&hash=41adcf82f191215ea4eee5854c9c4a7f
+
+
+
+BUSCAR A SAGA GUERRA Civil
+http://gateway.marvel.com/v1/public/events?name=Civil%20War&ts=1&apikey=d30c9fc66d3d6906df988cffc78ae86a&hash=41adcf82f191215ea4eee5854c9c4a7f
+
+BUSCAR PERSONAGENS DE GUERRA CIVIL 
+http://gateway.marvel.com/v1/public/events/238/characters?&ts=1&apikey=d30c9fc66d3d6906df988cffc78ae86a&hash=41adcf82f191215ea4eee5854c9c4a7f
+
+BUSCAR REVISTAS DE GUERRA CIVIL 
+http://gateway.marvel.com/v1/public/events/238/comics?&ts=1&apikey=d30c9fc66d3d6906df988cffc78ae86a&hash=41adcf82f191215ea4eee5854c9c4a7f
+
+BUSCAR REVISTAS DE GUERRA CIVIL
+http://gateway.marvel.com/v1/public/events/238/creators?&ts=1&apikey=d30c9fc66d3d6906df988cffc78ae86a&hash=41adcf82f191215ea4eee5854c9c4a7f
