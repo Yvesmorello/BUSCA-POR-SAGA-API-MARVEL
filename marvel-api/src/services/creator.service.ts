@@ -9,18 +9,18 @@ class creatorService {
     }
 
     async findAll(){
-        const creatorFinded = await creatorModel.find()
-        return creatorFinded;
+        const creatorFound = await creatorModel.find()
+        return creatorFound;
     }
 
     async findById(id: string){
-        const creatorFinded = await creatorModel.findById(id)
-        return creatorFinded;
+        const creatorFound = await creatorModel.findById(id)
+        return creatorFound;
     }
 
     async findByApiId(id: string){
-        const creatorFinded = await creatorModel.findOne({ id }); // Busca pelo campo apiId
-        return creatorFinded;
+        const creatorFound = await creatorModel.findOne({ id }); // Busca pelo campo apiId
+        return creatorFound;
     }
    
     async update(creatorId: string, creator: creatorType) {

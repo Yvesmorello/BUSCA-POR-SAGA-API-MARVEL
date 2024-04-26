@@ -55,11 +55,11 @@ class comicController {
     async findByIdFromDataBase(req: Request, res: Response) {
         try {
             const id = req.params.id; // Agora usamos o ID da API fornecido como parâmetro
-            const comicFinded = await comicService.findByApiId(id); // Use uma função findByApiId para buscar pelo ID da API
-            if (!comicFinded) {
+            const comicFound = await comicService.findByApiId(id); // Use uma função findByApiId para buscar pelo ID da API
+            if (!comicFound) {
                 return res.status(404).json({ error: "Quadrinho não encontrado" });
             }
-            return res.json(comicFinded);
+            return res.json(comicFound);
         } catch (error) {
             console.error("Erro ao buscar quadrinho por ID da API:", error);
             return res.status(500).json({ error: "Erro ao buscar quadrinho por ID da API" });
@@ -68,11 +68,11 @@ class comicController {
 
     async findById(req: Request, res: Response) {
         try {
-            const comicFinded = await comicService.findById(req.params.id);
-            if (!comicFinded) {
+            const comicFound = await comicService.findById(req.params.id);
+            if (!comicFound) {
                 return res.status(404).json({ error: "Quadrinho não encontrado" });
             }
-            res.json(comicFinded);
+            res.json(comicFound);
         } catch (error) {
             console.error("Erro ao buscar quadrinho por ID:", error);
             res.status(500).json({ error: "Erro ao buscar quadrinho por ID" });
@@ -100,65 +100,3 @@ class comicController {
 }
 
 export default new comicController();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-import { Request, Response } from "express";
-import quadrinhoService from "../services/quadrinho.service";
-
-
-
-class quadrinhoController{
-
-    async create(req: Request, res: Response){
-        const quadrinhoCriado = await quadrinhoService.create(req.body)
-        res.status(201)
-        return res.json(quadrinhoCriado);
-    }
-
-    async findAll(req: Request, res: Response){
-        const quadrinhoEncontrado = await quadrinhoService.findAll()
-        return res.json(quadrinhoEncontrado);
-    }
-
-    async findById(req: Request, res: Response){
-        const quadrinhoEncontrado = await quadrinhoService.findById(req.params.id)
-        return res.json(quadrinhoEncontrado);
-    }
-
-    async update(req: Request, res: Response){
-        const quadrinhoAtualizado = await quadrinhoService.update(req.params.id, req.body)
-        return res.json(quadrinhoAtualizado);
-    }
-
-    async delete(req: Request, res: Response){
-        const deleteMessage = await quadrinhoService.delete(req.params.id)
-        return res.json(deleteMessage);
-    }
-}
-
-export default new quadrinhoController();
-*/

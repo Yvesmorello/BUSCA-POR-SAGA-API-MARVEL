@@ -56,11 +56,11 @@ class creatorController{
     async findByIdFromDataBase(req: Request, res: Response) {
         try {
             const id = req.params.id; // Agora usamos o ID da API fornecido como parâmetro
-            const creatorFinded = await creatorService.findByApiId(id); // Use uma função findByApiId para buscar pelo ID da API
-            if (!creatorFinded) {
+            const creatorFound = await creatorService.findByApiId(id); // Use uma função findByApiId para buscar pelo ID da API
+            if (!creatorFound) {
                 return res.status(404).json({ error: "Criador não encontrado" });
             }
-            return res.json(creatorFinded);
+            return res.json(creatorFound);
         } catch (error) {
             console.error("Erro ao buscar criador por ID da API:", error);
             return res.status(500).json({ error: "Erro ao buscar criador por ID da API" });

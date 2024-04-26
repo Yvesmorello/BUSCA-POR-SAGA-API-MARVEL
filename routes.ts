@@ -46,6 +46,10 @@ dbRoutes.post('/comics', comicController.create);                    // Criar no
 dbRoutes.delete('/comics/:id', comicController.delete);             //Rota para deletar um quadirnho (utilizar ID do Banco de Dados)
 dbRoutes.put('/comics/:id', comicController.update);               // Atualizar quadrinho por ID
 
+
+dbRoutes.get('/characters/:initialLetter', characterController.findCharactersByInitialLetter);
+
+
 export {
     apiRoutes, dbRoutes
 }

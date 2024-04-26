@@ -4,23 +4,23 @@ import { comicType } from "../types/comic.type"
 class  comicService {
 
     async create (quadrinho: comicType){
-        const quadrinhoCriado = await comicModel.create(quadrinho)
-        return quadrinhoCriado;
+        const comicCreated = await comicModel.create(quadrinho)
+        return comicCreated;
     }
 
     async findAll(){
-        const quadrinhoEncontrado = await comicModel.find()
-        return quadrinhoEncontrado;
+        const comicFound = await comicModel.find()
+        return comicFound;
     }
 
     async findById(id: string){
-        const quadrinhoEncontrado = await comicModel.findById(id)
-        return quadrinhoEncontrado;
+        const comicFound = await comicModel.findById(id)
+        return comicFound;
     }
 
     async findByApiId(id: string){
-        const comicFinded = await comicModel.findOne({ id }); // Busca pelo campo apiId
-        return comicFinded;
+        const comicFound = await comicModel.findOne({ id }); // Busca pelo campo apiId
+        return comicFound;
     }
 
     async update(comicId: string, comic: comicType){

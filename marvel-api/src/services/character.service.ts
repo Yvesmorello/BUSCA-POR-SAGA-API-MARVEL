@@ -10,18 +10,18 @@ class characterService {
     }
 
     async findAll(){
-        const characterFinded = await characterModel.find()
-        return characterFinded;
+        const characterFound = await characterModel.find()
+        return characterFound;
     }
 
     async findById(id: string){
-        const characterFinded = await characterModel.findById(id)
-        return characterFinded;
+        const characterFound = await characterModel.findById(id)
+        return characterFound;
     }
 
     async findByApiId(id: string){
-        const characterFinded = await characterModel.findOne({ id }); // Busca pelo campo apiId
-        return characterFinded;
+        const characterFound = await characterModel.findOne({ id }); // Busca pelo campo apiId
+        return characterFound;
     }
 
 
@@ -65,6 +65,16 @@ class characterService {
         }
     }
 
+    async findByNameStartingWith(initialLetter: string) {
+        try {
+            // Busca todos os personagens cujos nomes começam com a letra fornecida no banco de dados
+            const charactersStartingWithLetter = await characterModel.find({ name: { $regex: new RegExp(`^${initialLetter}`, 'i') } });
+            return charactersStartingWithLetter;
+        } catch (error) {
+            throw new Error(`Erro ao buscar personagens pela letra inicial: ${error}`)
+        }
+    }
+    
 }
 
 export default new  characterService;
