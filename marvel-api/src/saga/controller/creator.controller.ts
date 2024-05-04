@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import creatorService from "../services/creator.service";
 import creatorSchema from "../schema/creator.schema";
 import axios from "axios";
+import comicSchema from "../schema/comic.schema";
+
 
 class creatorController{
 
@@ -10,16 +12,15 @@ class creatorController{
             const creatorCreated = await creatorService.create(req.body);
             res.status(201).json(creatorCreated);
         } catch (error) {
-            console.error("Erro ao criar personagem:", error);
-            res.status(500).json({ error: "Erro ao criar personagem" });
+            console.error("Erro ao criar criador:", error);
+            res.status(500).json({ error: "Erro ao criar criador" });
         }
     }
 
     async findAll(req: Request, res: Response) {
         try {
             const apiUrl = `https://gateway.marvel.com:443/v1/public/events/238/creators?ts=1&apikey=d30c9fc66d3d6906df988cffc78ae86a&hash=41adcf82f191215ea4eee5854c9c4a7f`;
-        
-            // Faz a solicitação HTTP para a Marvel API
+
             const response = await axios.get(apiUrl);
 
             const creatorData = response.data.data.results;
@@ -29,7 +30,6 @@ class creatorController{
                 return rest;
             });
         
-            // Salva os criador no banco de dados MongoDB usando o modelo Mongoose
             const insertedCreators = await creatorSchema.insertMany(creatorWithoutId);
 
             res.json(insertedCreators);
@@ -42,7 +42,6 @@ class creatorController{
     
     async findAllFromDatabase(req: Request, res: Response) {
         try {
-            // Busca todos os criador salvos no banco de dados MongoDB
             const creator = await creatorService.findAll();
             return res.json(creator);
         } catch (error) {
@@ -55,8 +54,8 @@ class creatorController{
   
     async findByIdFromDataBase(req: Request, res: Response) {
         try {
-            const id = req.params.id; // Agora usamos o ID da API fornecido como parâmetro
-            const creatorFound = await creatorService.findByApiId(id); // Use uma função findByApiId para buscar pelo ID da API
+            const id = req.params.id; 
+            const creatorFound = await creatorService.findByApiId(id); 
             if (!creatorFound) {
                 return res.status(404).json({ error: "Criador não encontrado" });
             }
@@ -72,12 +71,10 @@ class creatorController{
             const creatorId = req.params.id;
             const apiUrl = `http://gateway.marvel.com/v1/public/creators/${creatorId}?&ts=1&apikey=d30c9fc66d3d6906df988cffc78ae86a&hash=41adcf82f191215ea4eee5854c9c4a7f`;
 
-            // Faz a solicitação HTTP para a Marvel API para buscar o personagem por ID
             const response = await axios.get(apiUrl);
 
             const creatorData = response.data.data.results;
 
-            // Retorna o personagem encontrado
             res.json(creatorData);
         } catch (error) {
             console.error("Erro ao buscar criador por ID:", error);
@@ -87,20 +84,14 @@ class creatorController{
 
     async update(req: Request, res: Response) {
         try {
-            // ID do criador fornecido na solicitação
             const creatorId = req.params.id;
-    
-            // Dados atualizados do criador obtidos da solicitação do cliente
             const updatedCreatorData = req.body;
-    
-            // Verifica se o ID fornecido é válido
+
             if (!creatorId) {
                 return res.status(400).json({ error: "ID de criador não fornecido" });
             }
-    
-            // Atualiza os dados do criador no banco de dados
+           
             const creatorUpdated = await creatorService.update(creatorId, updatedCreatorData);
-    
             res.json(creatorUpdated);
         } catch (error) {
             console.error("Erro ao atualizar criador:", error);
@@ -114,5 +105,4 @@ class creatorController{
         return res.json(deleteMessage)
     }
 }
-
 export default new creatorController();

@@ -20,21 +20,20 @@ class characterService {
     }
 
     async findByApiId(id: string){
-        const characterFound = await characterModel.findOne({ id }); // Busca pelo campo apiId
+        const characterFound = await characterModel.findOne({ id }); 
         return characterFound;
     }
 
 
     async update(characterId: string, character: characterType) {
         try {    
-            // Busca o personagem pelo ID fornecido
             const characterUpdated = await characterModel.findOneAndUpdate(
-                { id: characterId }, // Usamos o campo _id para filtrar
+                { id: characterId }, 
                 {
                     name: character.name,
                     description: character.description,
                     thumbnail: character.thumbnail,
-                    resourceURI: character.resourceURI, // Manter o resourceURI como uma string
+                    resourceURI: character.resourceURI,
                     comics: character.comics,
                     series: character.series,
                     stories: character.stories,
@@ -45,7 +44,6 @@ class characterService {
                 { new: true }
             );
     
-            // Verifica se o personagem foi encontrado e atualizado
             if (!characterUpdated) {
                 throw new Error("Personagem não encontrado");
             }
@@ -59,7 +57,7 @@ class characterService {
     async delete(id: string) {
         try {
             await characterModel.findByIdAndDelete(id)
-            return "Personagem Removido"
+            return 'Personagem Removido';
         } catch (error) {
             throw new Error(`Erro ao remover personagem: ${error}`)
         }
@@ -67,11 +65,23 @@ class characterService {
 
     async findByNameStartingWith(initialLetter: string) {
         try {
-            // Busca todos os personagens cujos nomes começam com a letra fornecida no banco de dados
             const charactersStartingWithLetter = await characterModel.find({ name: { $regex: new RegExp(`^${initialLetter}`, 'i') } });
             return charactersStartingWithLetter;
         } catch (error) {
             throw new Error(`Erro ao buscar personagens pela letra inicial: ${error}`)
+        }
+    }
+
+    async findSeriesByCharacterApiId(characterApiId: string) {
+        try {
+            const character = await characterModel.findOne({ apiId: characterApiId });
+            if (!character) {
+                throw new Error("Personagem não encontrado");
+            }
+            
+            return character.series;
+        } catch (error) {
+            throw new Error(`Erro ao buscar séries do personagem: ${error}`);
         }
     }
     

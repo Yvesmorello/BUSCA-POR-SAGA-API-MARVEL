@@ -1,6 +1,6 @@
 import { urlSchema } from "../schema/comic.schema";
 import { textObjects } from "../schema/comic.schema";
-import { SeriesSchema } from "../schema/comic.schema";
+import { seriesSchema } from "../schema/comic.schema";
 import { dateSchema } from "../schema/comic.schema";
 import { priceSchema } from "../schema/comic.schema";
 import { thumbnailSchema } from "../schema/comic.schema";
@@ -27,7 +27,7 @@ export interface comicType {
     textObjects: typeof textObjects[],
     resourceURI: String,
     urls: typeof urlSchema[],
-    series: typeof SeriesSchema[],
+    series: typeof seriesSchema[],
     dates: typeof dateSchema[],
     prices: typeof priceSchema[],
     thumbnail: typeof thumbnailSchema[],

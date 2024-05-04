@@ -19,7 +19,7 @@ class  comicService {
     }
 
     async findByApiId(id: string){
-        const comicFound = await comicModel.findOne({ id }); // Busca pelo campo apiId
+        const comicFound = await comicModel.findOne({ id }); 
         return comicFound;
     }
 
@@ -52,7 +52,7 @@ class  comicService {
             capaUrl: comic.capaUrl 
         }, { new: true });
         
-         // Verifica se o personagem foi encontrado e atualizado
+
          if (!comicUpdated) {
             throw new Error("Quadrinho não encontrado");
         }
@@ -69,6 +69,51 @@ class  comicService {
             return "Quadrinho Removido"
         } catch (error) {
             throw new Error(`Erro ao remover quadrinho: ${error}`)
+        }
+    }
+
+    async findCreatorsByComicApiId(comicApiId: string) {
+        try {
+            const comic = await comicModel.findOne({ apiId: comicApiId });
+            if (!comic) {
+                throw new Error("Quadrinho não encontrado no banco de dados");
+            }
+            const creators = comic.creators;
+            return creators;
+        } catch (error) {
+            throw new Error(`Erro ao buscar criadores da comic: ${error}`);
+        }
+    }
+
+    async getComicPriceByApiId(comicApiId: string) {
+        try {
+            const comic = await comicModel.findOne({ apiId: comicApiId });
+    
+            if (!comic) {
+                throw new Error("Quadrinho não encontrado no banco de dados");
+            }
+    
+            const comics = comic.prices;
+            return comics;
+        } catch (error) {
+            console.error("Erro ao buscar preço do quadrinho pelo ID da API:", error);
+            throw new Error("Erro ao buscar preço do quadrinho pelo ID da API");
+        }
+    }
+
+    async getComicCharactersByApiId(comicApiId: string) {
+        try {
+            const comic = await comicModel.findOne({ apiId: comicApiId });
+
+            if (!comic) {
+                throw new Error("Quadrinho não encontrado no banco de dados");
+            }
+    
+            const comics = comic.characters;
+            return comics;
+        } catch (error) {
+            console.error("Erro ao buscar personagem do quadrinho pelo ID da API:", error);
+            throw new Error("Erro ao buscar personagem do quadrinho pelo ID da API");
         }
     }
 }

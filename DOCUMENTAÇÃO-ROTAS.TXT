@@ -1,0 +1,141 @@
+Rotas da API (FAZEM REQUISIÇÕES DIRETAMENTE PARA A API DA MARVEL)
+
+ - Personagens
+
+        - GET /characters - Descrição: Retorna uma lista de todos os personagens disponíveis, buscando na API.
+        - Uso: GET (http://localhost:{porta}/api/characters)
+
+        - GET /characters/:id - Descrição: Retorna informações detalhadas sobre um personagem específico, buscando na API pelo ID do personagems.
+        - Parâmetros: (:id:  (ID do personagem)). 
+        - Uso: GET (http://localhost:{porta}/api/characters/:id)
+
+ - Criadores
+
+        - GET /creators - Descrição: Retorna uma lista de todos os criadores cadastrados, buscando na API. (Uso: GET http://localhost:{porta}/api/creators)
+
+        - GET /creators/:id - Descrição: Retorna informações detalhadas sobre um criador específico, buscando na API pelo ID do criador. 
+        - Parâmetros: (:id: (ID do criador)). 
+        - Uso: GET (http://localhost:{porta}/api/creators/:id)
+
+ - Quadrinhos
+
+        - GET /comics - Descrição: Retorna uma lista de todos os quadrinhos disponíveis,buscando na API. 
+        - Uso: GET (http://localhost:{porta}/api/comics)
+
+        - GET /comics/:id - Descrição: Retorna informações detalhadas sobre um quadrinho específico, buscando na API pelo ID do quadrinho.
+        - Parâmetros: (:id: (O ID do quadrinho)).
+        - Uso: GET (http://localhost:{porta}/api/comics/:id)
+
+
+ROTAS DO BANCO DE DADOS
+
+As rotas abaixo são para interagir com o banco de dados local da aplicação.
+
+
+
+ - Personagens
+    
+    - GET /characters - Descrição: Retorna uma lista de todos os personagens armazenados no banco de dados.
+    - Uso: GET (http://localhost:{porta}/db/characters)
+    - Exemplo de Uso: GET (http://localhost:3000/db/characters)
+
+    - GET /characters/:id - Descrição: Retorna informações detalhadas sobre um personagem específico armazenado no banco de dados.
+    - Parâmetros: (:id: (ID do personagem)).
+    - Uso: GET (http://localhost:{porta}/db/characters/:id)
+    - Exemplo de Uso: GET (http://localhost:3000/db/characters/456789)
+
+    - POST /characters - Descrição: Cria um novo personagem no banco de dados.
+    - Uso: POST (http://localhost:{porta}/db/characters)
+    - Exemplo de Uso: GET (http://localhost:3000/db/characters)
+    
+    - PUT /characters/:id - Descrição: Atualiza informações de um personagem existente no banco de dados.
+    - Parâmetros: (:id: (ID do personagem)).
+    - Uso: PUT (http://localhost:{porta}/db/characters/:id)
+    - Exemplo de Uso: GET (http://localhost:3000/db/characters/456789)
+
+    - DELETE /characters/:id - Descrição: Deleta um personagem do banco de dados.
+    - Parâmetros: (:id: (ID do personagem)).
+    - Uso: DELETE (http://localhost:{porta}/db/characters/:id)
+    - Exemplo de Uso: GET (http://localhost:3000/db/characters/456789)
+
+
+
+
+- Criadores
+    
+    - GET /creators - Descrição: Retorna uma lista de todos os criadores armazenados no banco de dados.
+    - Uso: GET (http://localhost:{porta}/db/creators)
+    - Exemplo de Uso: GET (http://localhost:3000/db/creators)
+
+    - GET /creators/:id - Descrição: Retorna informações detalhadas sobre um criador específico armazenado no banco de dados.
+    - Parâmetros: (:id: (ID do criador)).
+    - Uso: GET (http://localhost:{porta}/db/creators/:id)
+    - Exemplo de Uso: GET (http://localhost:3000/db/creators/456789)
+
+    - POST /creators - Descrição: Cria um novo criador no banco de dados.
+    - Uso: POST (http://localhost:{porta}/db/creators)
+    - Exemplo de Uso: GET (http://localhost:3000/db/creators)
+    
+    - PUT /creators/:id - Descrição: Atualiza informações de um criador existente no banco de dados.
+    - Parâmetros: (:id: (ID do criador)).
+    - Uso: PUT (http://localhost:{porta}/db/creators/:id)
+    - Exemplo de Uso: GET (http://localhost:3000/db/creators/456789)
+
+    - DELETE /creators/:id - Descrição: Deleta um criador do banco de dados.
+    - Parâmetros: (:id: (ID do criador)).
+    - Uso: DELETE (http://localhost:{porta}/db/creators/:id)
+    - Exemplo de Uso: GET (http://localhost:3000/db/creators/456789)
+
+
+
+- Quadrinhos
+    
+    - GET /comics - Descrição: Retorna uma lista de todos os quadrinhos armazenados no banco de dados.
+    - Uso: GET (http://localhost:{porta}/db/comics)
+    - Exemplo de Uso: GET (http://localhost:3000/db/comics)
+
+    - GET /comics/:id - Descrição: Retorna informações detalhadas sobre um quadrinho específico armazenado no banco de dados.
+    - Parâmetros: (:id: (ID do quadrinho)).
+    - Uso: GET (http://localhost:{porta}/db/comics/:id)
+    - Exemplo de Uso: GET (http://localhost:3000/db/comics/456789)
+
+    - POST /comics - Descrição: Cria um novo quadrinho no banco de dados.
+    - Uso: POST (http://localhost:{porta}/db/comics)
+    - Exemplo de Uso: GET (http://localhost:3000/db/comics)
+
+    - PUT /comics/:id - Descrição: Atualiza informações de um quadrinho existente no banco de dados.
+    - Parâmetros: (:id: (ID do quadrinho)).
+    - Uso: PUT (http://localhost:{porta}/db/comics/:id)
+    - Exemplo de Uso: GET (http://localhost:3000/db/comics/456789)
+
+    - DELETE /comics/:id - Descrição: Deleta um quadrinho do banco de dados.
+    - Parâmetros: (:id: (ID do quadrinho)).
+    - Uso: DELETE (http://localhost:{porta}/db/comics/:id)
+    - Exemplo de Uso: GET (http://localhost:3000/db/comics/456789)
+
+
+    ROTAS AUXILIARES 
+
+    - GET /characters/initialLetter/:initialLetter - Descrição: Retorna uma lista de personagens cujos nomes começam com a letra fornecida no banco de dados.
+    - Uso: GET (http://localhost:{porta}/db/characters/initialLetter/:initialLetter)
+    - Exemplo de Uso: GET (http://localhost:3000/db/characters/initialLetter/A)
+
+    - GET /characters/character-series/:characterId - Descrição: Retorna as séries associadas a um personagem específico com base no ID do personagem.
+    - Parâmetros: (:characterId: ID do personagem)
+    - Uso: GET (http://localhost:{porta}/db/characters/character-series/:characterId)
+    - Exemplo de Uso: GET (http://localhost:3000/db/characters/character-series/123456)
+
+    - GET /comics/price/:comicId - Descrição: Retorna o preço de um quadrinho específico com base no ID do quadrinho.
+    - Parâmetros: (:comicId: ID do quadrinho)
+    - Uso: GET (http://localhost:{porta}/db/comics/price/:comicId)
+    - Exemplo de Uso: GET (http://localhost:3000/db/comics/price/987654)
+
+    - GET /comics/comic-creators/:comicId - Descrição: Retorna os criadores associados a um quadrinho específico com base no ID do quadrinho.
+    - Parâmetros: (:comicId: ID do quadrinho)
+    - Uso: GET (http://localhost:{porta}/db/comics/comic-creators/:comicId)
+    - Exemplo de Uso: GET (http://localhost:3000/db/comics/comic-creators/789012)
+
+    - GET /comics/comic-characters/:comicId - Descrição: Retorna os personagens associados a um quadrinho específico com base no ID do quadrinho.
+    - Parâmetros: (:comicId: ID do quadrinho)
+    - Uso: GET (http://localhost:{porta}/db/comics/comic-characters/:comicId)
+    - Exemplo de Uso: GET (http://localhost:3000/db/comics/comic-characters/456789)

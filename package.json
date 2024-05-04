@@ -1,31 +1,28 @@
 {
-
-"sripts":{
-  "start": "ts-node marvel-api/src/server.ts",
+  "scripts": {
+    "start": "ts-node marvel-api/src/server.ts",
     "start:dev": "nodemon marvel-api/src/server.ts",
     "cluster": "ts-node marvel-api/src/server.ts",
     "test": "jest",
-    "cannon": "npx autocannon -c 500 -d 20 -w 10 --renderStatusCodes --latency --warmup [ -c 1 -d 2 ] localhost:3000/books"
-},
-
-"devDependencies": {
-  "@types/jest": "^29.5.12",
-  "@jest/globals": "^29.7.0",
-  "@types/express": "^4.17.21",
-  "@types/node": "^20.12.7",
-  "@types/supertest": "^6.0.2",
-  "axios": "^1.6.8",
-  "jest": "^29.7.0",
-  "nodemon": "^3.1.0",
-  "supertest": "^6.3.4",
-  "ts-jest": "^29.1.2",
-  "ts-node": "^10.9.2",
-  "typescript": "^5.4.5"
- },
+    "cannon": "npx autocannon -c 500 -d 20 -w 10 --renderStatusCodes --latency --warmup [ -c 1 -d 2 ] localhost:1000/saga"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@jest/globals": "^29.7.0",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.7",
+    "@types/supertest": "^6.0.2",
+    "axios": "^1.6.8",
+    "jest": "^29.7.0",
+    "nodemon": "^3.1.0",
+    "supertest": "^6.3.4",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
   "dependencies": {
     "autocannon": "^7.15.0",
     "express": "^4.19.2",
     "mongoose": "^8.3.2"
   }
 }
-

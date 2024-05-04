@@ -1,9 +1,6 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import { apiRoutes, dbRoutes } from './routes';
-import * as request from 'supertest';
-
-const app = express();
 
 class App {
     public express: express.Application
@@ -33,4 +30,6 @@ class App {
         this.express.use('/db', dbRoutes);
     }
 }
+
+
 export default new App().express;

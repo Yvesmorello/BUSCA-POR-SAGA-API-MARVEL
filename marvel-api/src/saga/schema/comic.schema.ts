@@ -17,14 +17,13 @@ export const ComicSchema = new Schema({
     name: String,
 }, {_id:false});
 
-export const ComicSchemaType = new Schema({
+export const comicSchemaType = new Schema({
     resourceURI: String,
     name: String,
     type: String
 }, {_id:false});
 
-// Esquema para representar cada série
-export const SeriesSchema = new Schema({
+export const seriesSchema = new Schema({
     resourceURI: String,
     name: String,
 }, {_id:false});
@@ -52,21 +51,21 @@ export const imagesSchema = new Schema({
 export const creatorsSchema = new Schema({
     availible: Number,
     collectionURI: String,
-    items: [ComicSchemaType],
-    returned: Number
-}, {_id:false});
-
-export const charactersSchema = new Schema({
-    availible: Number,
-    collectionURI: String,
-    items: [ComicSchemaType],
+    items: [comicSchemaType],
     returned: Number
 }, {_id:false});
 
 export const storySchema = new Schema({
     available: Number,
     collectionURI: String,
-    items: [ComicSchemaType],
+    items: [comicSchemaType],
+    returned: Number
+}, {_id:false});
+
+export const charactersSchema = new Schema({
+    availible: Number,
+    collectionURI: String,
+    items: [comicSchemaType],
     returned: Number
 }, {_id:false});
 
@@ -93,7 +92,7 @@ const comicSchema = new Schema({
     textObjects: [textObjects],
     resourceURI: String,
     urls: [urlSchema],
-    series: [SeriesSchema],
+    series: [seriesSchema],
     dates: [dateSchema],
     prices: [priceSchema],
     thumbnail: [thumbnailSchema],

@@ -17,7 +17,7 @@ export const ComicSchemaType = new Schema({
 export const ComicsDataSchema = new Schema({
     available: Number,
     collectionURI: String,
-    items: [ComicSchema], // Lista de quadrinhos
+    items: [ComicSchema], 
     returned: Number
 }, {_id:false});
 
@@ -71,7 +71,7 @@ const creatorSchema = new Schema ({
     fullName: String,
     modified: String,
     thumbnail: ThumbnailSchema,
-    resourceURI: String, // Manter o resourceURI como uma string
+    resourceURI: String, 
     comics: ComicsDataSchema,
     series: [SeriesSchema],
     stories: [StorySchema],

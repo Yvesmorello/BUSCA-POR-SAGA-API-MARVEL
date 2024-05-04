@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import characterController from './marvel-api/src/controller/character.controller';
-import creatorController from './marvel-api/src/controller/creator.controller';
-import comicController from './marvel-api/src/controller/comic.controller';
+import characterController from './saga/controller/character.controller';
+import creatorController from './saga/controller/creator.controller';
+import comicController from './saga/controller/comic.controller';
 import axios from 'axios';
 
 
@@ -11,15 +11,15 @@ const dbRoutes  = Router();
 // ROTAS API 
 
 //PERSONAGEM
-apiRoutes.get('/characters', characterController.findAll);// Get API
+apiRoutes.get('/characters', characterController.findAll);       // Get API
 apiRoutes.get('/characters/:id', characterController.findById); // Buscar character por ID
 
 ///CRIADOR
-apiRoutes.get('/creators', creatorController.findAll); // Listar todos os creator
+apiRoutes.get('/creators', creatorController.findAll);       // Listar todos os creator
 apiRoutes.get('/creators/:id', creatorController.findById); // Buscar criador por ID
 
 //QUADRINHO
-apiRoutes.get('/comics', comicController.findAll); // Listar todos os comic
+apiRoutes.get('/comics', comicController.findAll);       // Listar todos os comic
 apiRoutes.get('/comics/:id', comicController.findById); // Buscar quadrinho por ID
 
 
@@ -36,7 +36,7 @@ dbRoutes.delete('/characters/:id', characterController.delete);           //    
 dbRoutes.get('/creators', creatorController.findAllFromDatabase);        // Listar todos os criadores no Banco de Dados
 dbRoutes.get('/creators/:id', creatorController.findByIdFromDataBase);  // Buscar criador por ID (usar o id próprio do criador ou ID do banco de dados)
 dbRoutes.post('/creators', creatorController.create);                  // Criar novo criador
-dbRoutes.put('/creators/:id', creatorController.update);              // Você só pode atualizar o firstName, middleName, lastName, sufix, fulllName, modified, thumbnail e comics do Criador (usar o id próprio do criador ou ID do banco de dados)
+dbRoutes.put('/creators/:id', creatorController.update);              // Atualizar criador
 dbRoutes.delete('/creators/:id', creatorController.delete);
 
 //QUADRINHO
@@ -47,9 +47,16 @@ dbRoutes.delete('/comics/:id', comicController.delete);             //Rota para 
 dbRoutes.put('/comics/:id', comicController.update);               // Atualizar quadrinho por ID
 
 
-dbRoutes.get('/characters/:initialLetter', characterController.findCharactersByInitialLetter);
+//ROTAS AUXILIARES 
+dbRoutes.get('/characters/initialLetter/:initialLetter', characterController.findCharactersByInitialLetter);  // ROTA PARA BUSCAR PERSONAGEM PELA LETRA INICIAL - NA HQ ESCOLHIDA A API SÓ MOSTRA OS NOMES DOS PERSONAGENS DE A ATÉ C 
+dbRoutes.get('/characters/character-series/:characterId', characterController.findSeriesByCharacterApiId);   // ROTA PARA BUSCAR SERIES DE PERSONAGENS ESPECIFICOS 
+dbRoutes.get('/comics/price/:comicId', comicController.getComicPrice);                                      // ROTA PARA BUSCAR O PREÇO DE UM QUADRINHO ESPECIFICO    
+dbRoutes.get('/comics/comic-creators/:comicId', comicController.findCreatorsByComic);                      // ROTA PARA BUSCAR CRIADORES POR QUADRINHOS ESPECIFICOS 
+dbRoutes.get('/comics/comic-characters/:comicId', comicController.getComicCharacters);                    // ROTA PARA BUSCAR PERSONAGENS DE QUADRINHOS ESPECIFICOS  
+
 
 
 export {
     apiRoutes, dbRoutes
 }
+1009165

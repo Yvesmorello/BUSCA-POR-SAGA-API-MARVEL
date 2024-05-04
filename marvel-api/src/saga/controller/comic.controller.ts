@@ -20,7 +20,6 @@ class comicController {
         try {
             const apiUrl = `http://gateway.marvel.com/v1/public/events/238/comics?&ts=1&apikey=d30c9fc66d3d6906df988cffc78ae86a&hash=41adcf82f191215ea4eee5854c9c4a7f`;
         
-            // Faz a solicitação HTTP para a Marvel API
             const response = await axios.get(apiUrl);
 
             const comicsData = response.data.data.results;
@@ -30,7 +29,6 @@ class comicController {
                 return rest;
             });
 
-            // Salva os personagens no banco de dados MongoDB usando o modelo Mongoose
             const insertedComics = await comicSchema.insertMany(comicsWithoutId);
 
             res.json(insertedComics);
@@ -42,7 +40,6 @@ class comicController {
 
     async findAllFromDatabase(req: Request, res: Response) {
         try {
-            // Busca todos os personagens salvos no banco de dados MongoDB
             const comics = await comicService.findAll();
             return res.json(comics);
         } catch (error) {
@@ -54,8 +51,8 @@ class comicController {
     
     async findByIdFromDataBase(req: Request, res: Response) {
         try {
-            const id = req.params.id; // Agora usamos o ID da API fornecido como parâmetro
-            const comicFound = await comicService.findByApiId(id); // Use uma função findByApiId para buscar pelo ID da API
+            const id = req.params.id; 
+            const comicFound = await comicService.findByApiId(id); 
             if (!comicFound) {
                 return res.status(404).json({ error: "Quadrinho não encontrado" });
             }
@@ -96,7 +93,40 @@ class comicController {
         const deleteMessage = await comicService.delete(req.params.id)
         return res.json(deleteMessage)
     }
-    
+
+    async findCreatorsByComic(req: Request, res: Response) {
+        try {
+            const comicApiId = req.params.comicApiId;
+            const creators = await comicService.findCreatorsByComicApiId(comicApiId);
+            res.json({ creators });
+        } catch (error) {
+            console.error("Erro ao buscar criadores da comic:", error);
+            res.status(500).json({ error: "Erro ao buscar criadores da comic" });
+        }
+    }
+
+    async getComicPrice(req: Request, res: Response) {
+        try {
+            const comicApiId = req.params.comicApiId; 
+            const price = await comicService.getComicPriceByApiId(comicApiId);
+            res.json({ price });
+        } catch (error) {
+            console.error("Erro ao buscar preço do quadrinho:", error);
+            res.status(500).json({ error: "Erro ao buscar preço do quadrinho" });
+        }
+    }
+
+    async getComicCharacters(req: Request, res: Response) {
+        try {
+            const comicApiId = req.params.comicApiId; 
+            const character = await comicService.getComicCharactersByApiId(comicApiId);
+            res.json({ character });
+        } catch (error) {
+            console.error("Erro ao buscar personagem do quadrinho:", error);
+            res.status(500).json({ error: "Erro ao buscar personagem do quadrinho" });
+        }
+    }
+
 }
 
 export default new comicController();

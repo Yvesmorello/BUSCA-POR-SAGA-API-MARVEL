@@ -21,7 +21,6 @@ class characterController {
         try {
             const apiUrl = `http://gateway.marvel.com/v1/public/events/238/characters?&ts=1&apikey=d30c9fc66d3d6906df988cffc78ae86a&hash=41adcf82f191215ea4eee5854c9c4a7f`;
         
-            // Faz a solicitação HTTP para a Marvel API
             const response = await axios.get(apiUrl);
 
             const charactersData = response.data.data.results;
@@ -31,7 +30,6 @@ class characterController {
                 return rest;
             });
 
-            // Salva os personagens no banco de dados MongoDB usando o modelo Mongoose
             const insertedCharacters = await characterSchema.insertMany(charactersWithoutId);
 
             res.json(insertedCharacters);
@@ -43,7 +41,6 @@ class characterController {
 
     async findAllFromDatabase(req: Request, res: Response) {
         try {
-            // Busca todos os personagens salvos no banco de dados MongoDB
             const characters = await characterService.findAll();
             return res.json(characters);
         } catch (error) {
@@ -55,8 +52,8 @@ class characterController {
    
     async findByIdFromDataBase(req: Request, res: Response) {
         try {
-            const id = req.params.id; // Agora usamos o ID da API fornecido como parâmetro
-            const characterFound = await characterService.findByApiId(id); // Use uma função findByApiId para buscar pelo ID da API
+            const id = req.params.id; 
+            const characterFound = await characterService.findByApiId(id);
             if (!characterFound) {
                 return res.status(404).json({ error: "Personagem não encontrado" });
             }
@@ -72,12 +69,10 @@ class characterController {
             const characterId = req.params.id;
             const apiUrl = `http://gateway.marvel.com/v1/public/characters/${characterId}?&ts=1&apikey=d30c9fc66d3d6906df988cffc78ae86a&hash=41adcf82f191215ea4eee5854c9c4a7f`;
 
-            // Faz a solicitação HTTP para a Marvel API para buscar o personagem por ID
             const response = await axios.get(apiUrl);
 
             const characterData = response.data.data.results;
 
-            // Retorna o personagem encontrado
             res.json(characterData);
         } catch (error) {
             console.error("Erro ao buscar personagem por ID:", error);
@@ -87,18 +82,14 @@ class characterController {
 
     async update(req: Request, res: Response) {
         try {
-            // ID do personagem fornecido na solicitação
             const characterId = req.params.id;
     
-            // Dados atualizados do personagem obtidos da solicitação do cliente
             const updatedCharacterData = req.body;
     
-            // Verifica se o ID fornecido é válido
             if (!characterId) {
                 return res.status(400).json({ error: "ID de personagem não fornecido" });
             }
     
-            // Atualiza os dados do personagem no banco de dados
             const characterUpdated = await characterService.update(characterId, updatedCharacterData);
     
             res.json(characterUpdated);
@@ -115,16 +106,25 @@ class characterController {
 
     async findCharactersByInitialLetter(req: Request, res: Response) {
         try {
-            // Obtém a letra inicial fornecida pelo usuário nos parâmetros da requisição
-            const initialLetter = req.params.initialLetter.toUpperCase(); // Converte para maiúscula para garantir consistência
+            const initialLetter = req.params.initialLetter.toUpperCase();  
     
-            // Busca os personagens cujos nomes começam com a letra fornecida no banco de dados
             const charactersStartingWithLetter = await characterService.findByNameStartingWith(initialLetter);
     
             res.json(charactersStartingWithLetter);
         } catch (error) {
             console.error("Erro ao buscar personagens pela letra inicial:", error);
             res.status(500).json({ error: "Erro ao buscar personagens pela letra inicial" });
+        }
+    }
+
+    async findSeriesByCharacterApiId(req: Request, res: Response) {
+        try {
+            const characterApiId = req.params.characterApiId;
+            const series = await characterService.findSeriesByCharacterApiId(characterApiId);
+            res.json({ series });
+        } catch (error) {
+            console.error("Erro ao buscar séries do personagem:", error);
+            res.status(500).json({ error: "Erro ao buscar séries do personagem" });
         }
     }
     

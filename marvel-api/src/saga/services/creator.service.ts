@@ -1,5 +1,6 @@
 import creatorModel from "../schema/creator.schema"
 import { creatorType } from "../types/creator.type"
+import comicSchema from "../schema/comic.schema";
 
 class creatorService {
 
@@ -19,15 +20,14 @@ class creatorService {
     }
 
     async findByApiId(id: string){
-        const creatorFound = await creatorModel.findOne({ id }); // Busca pelo campo apiId
+        const creatorFound = await creatorModel.findOne({ id }); 
         return creatorFound;
     }
    
     async update(creatorId: string, creator: creatorType) {
         try {    
-            // Busca o personagem pelo ID fornecido
             const creatorUpdated = await creatorModel.findOneAndUpdate(
-                { id: creatorId }, // Usamos o campo _id para filtrar
+                { id: creatorId },
                 {
                     firstName: creator.firstName,
                     middleName: creator.middleName,
@@ -38,16 +38,15 @@ class creatorService {
                     thumbnail: creator.thumbnail,
                     resourceURI: creator.resourceURI,
                     comics: creator.comics,
-                    // series: creator.series,
-                    // stories: creator.stories,
-                    // events: creator.events,
-                    // urls: creator.urls,
-                    // function: creator.function
+                    series: creator.series,
+                    stories: creator.stories,
+                    events: creator.events,
+                    urls: creator.urls,
+                    function: creator.function
                 },
                 { new: true }
             );
     
-            // Verifica se o personagem foi encontrado e atualizado
             if (!creatorUpdated) {
                 throw new Error("Criador não encontrado");
             }
@@ -66,7 +65,6 @@ class creatorService {
             throw new Error(`Erro ao remover criador: ${error}`)
         }
     }
-
 }
 
 export default new  creatorService;

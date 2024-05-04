@@ -68,7 +68,7 @@ const characterSchema = new Schema({
     name: String,
     description: String,
     thumbnail: ThumbnailSchema,
-    resourceURI: String, // Manter o resourceURI como uma string
+    resourceURI: String, 
     comics: ComicsDataSchema,
     series: [SeriesSchema],
     stories: [StorySchema],
